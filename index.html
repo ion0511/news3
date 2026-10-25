@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X - 황실 소식통 단독 보도</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        xDark: '#000000',
+                        xCard: '#16181c',
+                        xBorder: '#2f3336',
+                        xGray: '#71767b',
+                        xBlue: '#1d9bf0',
+                        xPink: '#f91880',
+                        xGreen: '#00ba7c'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f1419;
+            color: #e7e9ea;
+        }
+        /* Hide scrollbars */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .toast-animate {
+            animation: fadeInOut 2.5s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            15% { opacity: 1; transform: translateY(0); }
+            85% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex justify-center bg-zinc-950 text-zinc-100">
+
+    <!-- Container Frame for Mobile App Vibe -->
+    <div class="w-full max-w-lg min-h-screen bg-black border-x border-xBorder flex flex-col justify-between relative shadow-2xl pb-16">
+        
+        <!-- Header -->
+        <header class="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-xBorder px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button onclick="showToast('뒤로가기')" class="text-white hover:bg-zinc-800 p-2 rounded-full transition">
+                    <i class="fa-solid fa-arrow-left text-lg"></i>
+                </button>
+                <h1 class="text-xl font-bold tracking-tight">게시물</h1>
+            </div>
+            <div class="flex items-center space-x-3 text-xBlue">
+                <button onclick="showToast('검색 기능')" class="hover:bg-zinc-900 p-2 rounded-full">
+                    <i class="fa-solid fa-magnifying-glass text-lg text-white"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Scrollable Content -->
+        <main class="flex-1 overflow-y-auto">
+            
+            <!-- Trending Bar Section -->
+            <section class="bg-zinc-900/60 p-3 border-b border-xBorder">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-xGray uppercase tracking-wider"><i class="fa-solid fa-fire text-amber-500 mr-1"></i> 대한민국 실시간 트렌드</span>
+                    <span class="text-xs text-xGray">실시간 업데이트</span>
+                </div>
+                <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
+                    <span class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded-full text-xBlue font-medium cursor-pointer whitespace-nowrap">#오시온_주아린</span>
+                    <span class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded-full text-xBlue font-medium cursor-pointer whitespace-nowrap">#태국_밀회포착</span>
+                    <span class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded-full text-xBlue font-medium cursor-pointer whitespace-nowrap">#비궁마마_어떡해</span>
+                    <span class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded-full text-xBlue font-medium cursor-pointer whitespace-nowrap">#황실폐지</span>
+                </div>
+            </section>
+
+            <!-- Main Breaking News Tweet Article -->
+            <article class="p-4 border-b border-xBorder">
+                <!-- Author Info -->
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                                <i class="fa-solid fa-newspaper"></i>
+                            </div>
+                            <span class="absolute -bottom-1 -right-1 bg-xBlue text-black text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-base hover:underline cursor-pointer">황실 소식통 (보도봇/공식계X)</span>
+                                <i class="fa-solid fa-circle-check text-xBlue text-sm"></i>
+                            </div>
+                            <span class="text-xGray text-sm">@Royal_News_KR</span>
+                        </div>
+                    </div>
+                    <button class="bg-white hover:bg-zinc-200 text-black font-bold text-xs px-4 py-1.5 rounded-full transition">
+                        팔로우
+                    </button>
+                </div>
+
+                <!-- Tweet Text -->
+                <p class="text-base leading-relaxed mb-3 whitespace-pre-line text-zinc-100 font-normal">
+<span class="text-red-500 font-bold">[단독]</span> 오시온 황태자, 태국 순방 중 배우 주아린과 심야 테라스 밀회 포착… 현지 매체 '키스신 방불케 하는 각도' 보도에 황실 대변인실 "사실 확인 중"
+                </p>
+
+                <!-- News Article Interactive Card (Clickable to open Article Modal) -->
+                <div onclick="openArticleModal()" class="rounded-2xl border border-xBorder overflow-hidden bg-zinc-900/80 hover:bg-zinc-800/80 transition cursor-pointer mb-3 group">
+                    <div class="relative h-48 bg-gradient-to-b from-slate-900 via-indigo-950 to-black flex items-center justify-center p-4 overflow-hidden">
+                        <!-- Photo Tag -->
+                        <div class="absolute top-3 left-3 bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-bold tracking-wider uppercase z-10">
+                            BREAKING NEWS
+                        </div>
+                        
+                        <!-- Silhouettes -->
+                        <svg class="w-full h-40 text-zinc-900 group-hover:scale-105 transition duration-300" viewBox="0 0 300 150" fill="currentColor">
+                            <rect x="20" y="110" width="260" height="8" rx="2" fill="#334155" />
+                            <rect x="50" y="118" width="6" height="32" fill="#1e293b" />
+                            <rect x="150" y="118" width="6" height="32" fill="#1e293b" />
+                            <rect x="250" y="118" width="6" height="32" fill="#1e293b" />
+                            
+                            <!-- Male & Female Silhouettes -->
+                            <circle cx="135" cy="45" r="14" fill="#0f172a" />
+                            <path d="M120 110 L120 70 C120 58 150 58 150 70 L150 110 Z" fill="#0f172a" />
+                            <circle cx="158" cy="48" r="12" fill="#0f172a" />
+                            <path d="M145 110 L148 73 C148 62 172 62 170 75 L165 110 Z" fill="#0f172a" />
+                            <path d="M130 75 Q155 78 162 72" stroke="#0f172a" stroke-width="6" stroke-linecap="round" fill="none"/>
+                        </svg>
+
+                        <div class="absolute bottom-2 right-3 text-[10px] text-zinc-400 bg-black/70 px-2 py-0.5 rounded">
+                            <i class="fa-solid fa-up-right-from-square mr-1"></i>기사 읽기
+                        </div>
+                    </div>
+
+                    <div class="p-3 border-t border-xBorder">
+                        <div class="text-xs text-xGray mb-0.5 flex items-center space-x-1">
+                            <i class="fa-regular fa-newspaper"></i>
+                            <span>royaltimes.co.kr · 로열타임즈</span>
+                        </div>
+                        <h2 class="text-sm font-bold text-zinc-100 group-hover:text-xBlue transition line-clamp-2">
+                            [속보] 오시온 황태자·배우 주아린, 태국서 심야 밀회 포착… 황실 "사실 확인 중"
+                        </h2>
+                        <p class="text-xs text-xGray mt-1 line-clamp-1">
+                            현지 매체 "키스신 방불케 하는 각도"... 황태자비 국혼 두 달 만의 파장
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tweet Timestamp & Info -->
+                <div class="text-xGray text-sm py-2 border-b border-xBorder flex flex-wrap gap-1 items-center">
+                    <span>2:51 오후</span>
+                    <span>·</span>
+                    <span>2026년 1월 25일</span>
+                    <span>·</span>
+                    <span class="font-bold text-white">990만</span>
+                    <span>조회수</span>
+                </div>
+
+                <!-- Tweet Metrics Stats -->
+                <div class="flex items-center space-x-4 py-3 border-b border-xBorder text-sm text-xGray">
+                    <div><strong class="text-white font-bold" id="retweetCount">8.1만</strong> <span class="text-xs">재게시</span></div>
+                    <div><strong class="text-white font-bold">9.1만</strong> <span class="text-xs">인용</span></div>
+                    <div><strong class="text-white font-bold" id="likeCount">8.9만</strong> <span class="text-xs">마음에 들어요</span></div>
+                    <div><strong class="text-white font-bold" id="bookmarkCount">3,739</strong> <span class="text-xs">북마크</span></div>
+                </div>
+
+                <!-- Interactive Action Buttons -->
+                <div class="flex items-center justify-between px-2 pt-3 text-xGray text-lg">
+                    <button onclick="focusReplyInput()" class="hover:text-xBlue transition flex items-center justify-center p-2 rounded-full hover:bg-xBlue/10">
+                        <i class="fa-regular fa-comment"></i>
+                    </button>
+                    <button id="retweetBtn" onclick="toggleRetweet()" class="hover:text-xGreen transition flex items-center justify-center p-2 rounded-full hover:bg-xGreen/10">
+                        <i class="fa-solid fa-retweet"></i>
+                    </button>
+                    <button id="likeBtn" onclick="toggleLike()" class="hover:text-xPink transition flex items-center justify-center p-2 rounded-full hover:bg-xPink/10">
+                        <i class="fa-regular fa-heart" id="likeIcon"></i>
+                    </button>
+                    <button id="bookmarkBtn" onclick="toggleBookmark()" class="hover:text-xBlue transition flex items-center justify-center p-2 rounded-full hover:bg-xBlue/10">
+                        <i class="fa-regular fa-bookmark" id="bookmarkIcon"></i>
+                    </button>
+                    <button onclick="copyShareLink()" class="hover:text-xBlue transition flex items-center justify-center p-2 rounded-full hover:bg-xBlue/10">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- User Live Reply Composer -->
+            <div class="p-4 border-b border-xBorder bg-zinc-950 flex items-start space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center font-bold text-white flex-shrink-0 text-sm">
+                    YOU
+                </div>
+                <div class="flex-1">
+                    <textarea id="userReplyInput" rows="2" placeholder="답글 게시하기..." class="w-full bg-transparent text-sm text-white placeholder-xGray focus:outline-none resize-none"></textarea>
+                    <div class="flex justify-between items-center mt-2 pt-2 border-t border-zinc-800">
+                        <div class="flex space-x-3 text-xBlue text-sm">
+                            <i class="fa-regular fa-image cursor-pointer hover:opacity-80"></i>
+                            <i class="fa-solid fa-list-ul cursor-pointer hover:opacity-80"></i>
+                            <i class="fa-regular fa-face-smile cursor-pointer hover:opacity-80"></i>
+                        </div>
+                        <button onclick="postUserReply()" class="bg-xBlue hover:bg-sky-500 text-white font-bold text-xs px-4 py-1.5 rounded-full transition">
+                            답글
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Replies List Section -->
+            <section id="repliesContainer" class="divide-y divide-xBorder">
+                
+                <!-- Reply 1 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-700 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">미</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">미친사랑의미친</span>
+                                <span class="text-xGray text-xs truncate">@love_is_gone · 58분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                주아린은 또 왜 저기 가 있어?ㅋㅋㅋㅋㅋ 저번에 전시회 때 태자비랑 그렇게 다정하더니 다 연출이었냐? 오시온 진짜 실망이다
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 42</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 18</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 1.2천</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 2 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-rose-800 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">K</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">K-로맨스 망령</span>
+                                <span class="text-xGray text-xs truncate">@kromance · 55분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                인용 돌리는 꼬라지 봐라ㅋㅋㅋ 친한 친구끼리 그럴 수 있다는 쉴드 치는 놈들 다 차단함ㄷㄷ 너네는 친구랑 테라스에서 허리 감고 저 각도로 대화하냐? 어휴
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 89</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 312</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 3.5천</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 3 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">T</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">tyc</span>
+                                <span class="text-xGray text-xs truncate">@tyc_0119 · 50분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                아니 세금 써서 태국 갔으면 외교를 해야지 연애질을 하고 왔네? 주아린은 또 일반인도 아니고 배우인데... 동네 창피해서 진짜 황실 폐지가 답이다 ㅅㅂ
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 120</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 890</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 8.9천</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 4 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-700 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">주</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">주목</span>
+                                <span class="text-xGray text-xs truncate">@iliiiiiiii · 45분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                살다 살다 황태자 불륜스캔들을 다 보네ㄷㄷㄷㄷ 딥페이크? 웃기지도 않아ㅋㅋㅋ
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 15</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 44</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 950</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 5 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">익</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">익명의 질주</span>
+                                <span class="text-xGray text-xs truncate">@an0on8282 · 38분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                인용 보는데 가관이네ㅋㅋㅋ 개인 사생활이라고 쉴드 치는 애들아 쟤는 개인이 아니라 국가 상징이야 공적인 자리에서 저러는 건 걍 무능한 거지 비궁마마는 무슨 죄냐? 전국도 아니고 전세계적으로 망신살 뻗쳤네
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 203</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 1.5천</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 1.2만</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 6 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-teal-800 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">팩</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">팩첵</span>
+                                <span class="text-xGray text-xs truncate">@fact_check_king · 30분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                근데 사진 수위가 너무 빼박이라 쉴드 불가임 주아린 허리 감싸고 있는건 뭐냐?ㅋㅋㅋ 황실 대변인실도 지금 보도자료 쓰다가 키보드 던졌을 듯;;;;
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 67</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 410</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 4.1천</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 7 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">노</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">노릴레</span>
+                                <span class="text-xGray text-xs truncate">@no91amily · 22분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                이래서 황실 무용론이 나오는 거임 특권은 다 누리면서 사고는 지가 치고 뒷수습은 국민 세금으로 하고 저 사진 한 장 때문에 태국이랑 외교 관계 틀어지면 누가 책임짐?
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 154</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 980</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 7.8천</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reply 8 -->
+                <div class="p-4 hover:bg-zinc-900/40 transition">
+                    <div class="flex space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-900 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">나</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-sm truncate">나이스</span>
+                                <span class="text-xGray text-xs truncate">@ne21591 · 12분</span>
+                            </div>
+                            <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                            <p class="text-sm leading-snug text-zinc-200">
+                                황실 대변인실은 지금 사실 확인 중?ㅋㅋㅋㅋ 사진이 말해주는데 무슨 확인을 더 함?ㅋㅋㅋ 사실 확인 해봤자 이미 외신에 다 퍼져서 수습 불가임 국격 하이패스로 수직 낙하 중ㅋㅋ
+                            </p>
+                            <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                                <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 98</span>
+                                <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 620</span>
+                                <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 5.3천</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- Bottom Mobile Tab Bar -->
+        <nav class="fixed bottom-0 w-full max-w-lg bg-black/90 backdrop-blur-md border-t border-xBorder py-2.5 px-6 flex justify-between items-center text-white z-40">
+            <button class="flex flex-col items-center text-white">
+                <i class="fa-solid fa-house text-xl"></i>
+            </button>
+            <button onclick="showToast('검색')" class="flex flex-col items-center text-xGray hover:text-white">
+                <i class="fa-solid fa-magnifying-glass text-xl"></i>
+            </button>
+            <button onclick="showToast('커뮤니티')" class="flex flex-col items-center text-xGray hover:text-white">
+                <i class="fa-solid fa-user-group text-xl"></i>
+            </button>
+            <button onclick="showToast('알림')" class="flex flex-col items-center text-xGray hover:text-white relative">
+                <i class="fa-regular fa-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 w-2 h-2 bg-xBlue rounded-full"></span>
+            </button>
+            <button onclick="showToast('쪽지')" class="flex flex-col items-center text-xGray hover:text-white">
+                <i class="fa-regular fa-envelope text-xl"></i>
+            </button>
+        </nav>
+
+        <!-- Toast Notification Container -->
+        <div id="toast" class="fixed bottom-16 left-1/2 -translate-x-1/2 bg-xBlue text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg hidden z-50">
+            알림 메시지
+        </div>
+
+        <!-- News Article Modal -->
+        <div id="articleModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+            <div class="bg-zinc-900 border border-zinc-700 w-full max-w-md rounded-2xl max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col">
+                <!-- Modal Header -->
+                <div class="sticky top-0 bg-zinc-900/95 backdrop-blur border-b border-zinc-800 p-4 flex justify-between items-center z-10">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-red-600 text-white text-xs font-extrabold px-2 py-0.5 rounded uppercase tracking-wider">단독 속보</span>
+                        <span class="text-sm font-bold text-zinc-300">로열타임즈</span>
+                    </div>
+                    <button onclick="closeArticleModal()" class="text-zinc-400 hover:text-white bg-zinc-800 hover:bg-zinc-700 rounded-full w-8 h-8 flex items-center justify-center transition">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Article Body -->
+                <div class="p-5 space-y-4 text-zinc-200">
+                    <div>
+                        <h1 class="text-xl font-bold leading-snug text-white mb-2">
+                            [속보] 오시온 황태자, 태국 순방 중 배우 주아린과 심야 테라스 밀회… "입장 정리 중"
+                        </h1>
+                        <div class="flex items-center justify-between text-xs text-xGray pb-3 border-b border-zinc-800">
+                            <span>정진우 기자 (jwjung@royaltimes.co.kr)</span>
+                            <span>2026.01.25 14:48 입력</span>
+                        </div>
+                    </div>
+
+                    <!-- Article Image Banner -->
+                    <div class="rounded-xl overflow-hidden bg-black border border-zinc-800 p-3 text-center">
+                        <div class="h-40 bg-gradient-to-b from-slate-900 via-indigo-950 to-black rounded flex items-center justify-center relative">
+                            <div class="text-zinc-500 text-xs">
+                                <i class="fa-solid fa-camera text-2xl mb-1 block"></i>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-zinc-500 mt-2 text-left">▲ 사진=현지 소셜 미디어 캡처</p>
+                    </div>
+
+                    <!-- Article Paragraphs -->
+                    <div class="text-sm leading-relaxed space-y-3 font-normal text-zinc-300">
+                        <p>
+                            2026년 1월 25일 태국 방콕 현지에서 열린 황실 공식 순방 일정 중, 오시온 황태자가 어릴 적부터 절친한 관계로 알려진 유명 배우 주아린과 호텔 테라스에서 심야 밀회를 갖는 모습이 포착되었다.
+                        </p>
+                        <p>
+                            두 사람은 오랫동안 정재계 및 연예계 안팎에서 여러 차례 열애설과 소문이 무성했던 관계다. 현지 매체들은 "연인 사이를 방불케 하는 친밀한 스킨십과 스킨십 각도"라며 집중 보도했다.
+                        </p>
+                        <p>
+                            황태자비 이여주와의 국혼 이후 불과 두 달여 만에 터진 초대형 불륜 스캔들에 황실 대변인실은 "현재 정확한 사실관계를 확인 중에 있으며, 추후 공식 입장을 발표하겠다"라며 당황한 기색을 감추지 못하고 있다.
+                        </p>
+                        <p class="text-zinc-400 italic bg-zinc-950 p-3 rounded-lg border border-zinc-800">
+                            본지는 추후 황실 및 주아린 측의 입장이 나오는 대로 추가 보도할 예정이다.
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-500 text-center">
+                        Copyrights ⓒ 로열타임즈. 무단 전재 및 재배포 금지
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="p-3 bg-zinc-950 border-t border-zinc-800 flex justify-end">
+                    <button onclick="closeArticleModal()" class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs px-5 py-2 rounded-lg transition">
+                        닫기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let isLiked = false;
+        let isRetweeted = false;
+        let isBookmarked = false;
+
+        function openArticleModal() {
+            document.getElementById('articleModal').classList.remove('hidden');
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').classList.add('hidden');
+        }
+
+        function toggleLike() {
+            const likeBtn = document.getElementById('likeBtn');
+            const likeIcon = document.getElementById('likeIcon');
+            const likeCountEl = document.getElementById('likeCount');
+
+            if (!isLiked) {
+                isLiked = true;
+                likeBtn.classList.add('text-xPink');
+                likeIcon.classList.remove('fa-regular');
+                likeIcon.classList.add('fa-solid');
+                likeCountEl.innerText = "8.9만+1";
+                showToast("게시물을 마음에 들어했습니다");
+            } else {
+                isLiked = false;
+                likeBtn.classList.remove('text-xPink');
+                likeIcon.classList.remove('fa-solid');
+                likeIcon.classList.add('fa-regular');
+                likeCountEl.innerText = "8.9만";
+            }
+        }
+
+        function toggleRetweet() {
+            const retweetBtn = document.getElementById('retweetBtn');
+            const retweetCountEl = document.getElementById('retweetCount');
+
+            if (!isRetweeted) {
+                isRetweeted = true;
+                retweetBtn.classList.add('text-xGreen');
+                retweetCountEl.innerText = "8.1만+1";
+                showToast("내 프로필로 재게시되었습니다");
+            } else {
+                isRetweeted = false;
+                retweetBtn.classList.remove('text-xGreen');
+                retweetCountEl.innerText = "8.1만";
+            }
+        }
+
+        function toggleBookmark() {
+            const bookmarkBtn = document.getElementById('bookmarkBtn');
+            const bookmarkIcon = document.getElementById('bookmarkIcon');
+
+            if (!isBookmarked) {
+                isBookmarked = true;
+                bookmarkBtn.classList.add('text-xBlue');
+                bookmarkIcon.classList.remove('fa-regular');
+                bookmarkIcon.classList.add('fa-solid');
+                showToast("북마크에 추가되었습니다");
+            } else {
+                isBookmarked = false;
+                bookmarkBtn.classList.remove('text-xBlue');
+                bookmarkIcon.classList.remove('fa-solid');
+                bookmarkIcon.classList.add('fa-regular');
+                showToast("북마크에서 삭제되었습니다");
+            }
+        }
+
+        function copyShareLink() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("링크가 클립보드에 복사되었습니다");
+        }
+
+        function focusReplyInput() {
+            const input = document.getElementById('userReplyInput');
+            input.focus();
+        }
+
+        function postUserReply() {
+            const input = document.getElementById('userReplyInput');
+            const content = input.value.trim();
+
+            if (!content) {
+                showToast("답글 내용을 입력해주세요");
+                return;
+            }
+
+            const repliesContainer = document.getElementById('repliesContainer');
+
+            const newReply = document.createElement('div');
+            newReply.className = "p-4 border-b border-xBorder bg-zinc-900/30 border-l-2 border-l-xBlue animate-pulse";
+            newReply.innerHTML = `
+                <div class="flex space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                        YOU
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center space-x-1">
+                            <span class="font-bold text-sm truncate">익명의 덕후</span>
+                            <span class="text-xGray text-xs truncate">@user_fan · 방금</span>
+                        </div>
+                        <div class="text-xGray text-xs mb-1">@Royal_News_KR 님에게 보내는 답글</div>
+                        <p class="text-sm leading-snug text-zinc-200">${escapeHtml(content)}</p>
+                        <div class="flex justify-between max-w-xs mt-2 text-xGray text-xs">
+                            <span class="hover:text-xBlue"><i class="fa-regular fa-comment mr-1"></i> 0</span>
+                            <span class="hover:text-xGreen"><i class="fa-solid fa-retweet mr-1"></i> 0</span>
+                            <span class="hover:text-xPink"><i class="fa-regular fa-heart mr-1"></i> 1</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            repliesContainer.prepend(newReply);
+            input.value = '';
+            
+            setTimeout(() => {
+                newReply.classList.remove('animate-pulse');
+            }, 1000);
+
+            showToast("답글이 성공적으로 게시되었습니다!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('toast-animate');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('toast-animate');
+            }, 2500);
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;")
+                       .replace(/</g, "&lt;")
+                       .replace(/>/g, "&gt;")
+                       .replace(/"/g, "&quot;")
+                       .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
